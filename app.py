@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 import sqlite3
+from database import cursor
 
 app = Flask(__name__)
 
@@ -34,8 +35,6 @@ def change_password():
         username = request.form["username"]
         new_password = request.form["new_password"]
 
-        conn = sqlite3.connect("usuarios.db")
-        cursor = conn.cursor()
         cursor.execute(f"UPDATE users SET password = '{new_password}' WHERE username = '{username}'")
         conn.commit()
         conn.close()

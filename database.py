@@ -28,7 +28,8 @@ def criar_banco():
 
     conn.commit()
     conn.close()
+    return cursor
 
 if __name__ == "__main__":
-    criar_banco()
+    cursor = criar_banco()
     print("Banco de dados configurado com sucesso!")

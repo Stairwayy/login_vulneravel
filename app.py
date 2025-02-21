@@ -4,7 +4,7 @@ import sqlite3
 app = Flask(__name__)
 
 def get_db_connection():
-    # Função para criar e retornar uma conexão com o banco ded dados
+    # Função para criar e retornar uma conexão com o banco de dados
     conn = sqlite3.connect("usuarios.db")
     return conn
 

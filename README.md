@@ -17,7 +17,7 @@ Este repositório contém uma aplicação web de login desenvolvida em **Python*
 
 ## 🚀 Tecnologias Utilizadas
 - **Python** (Flask, SQLite3)
-- **HTML/CSS** (para os formulários de login e alteração de senha)
+- **HTML** (para os formulários de login e alteração de senha)
 
 ---
 

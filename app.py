@@ -1,8 +1,12 @@
 from flask import Flask, request, render_template
 import sqlite3
-from database import cursor
 
 app = Flask(__name__)
+
+def get_db_connection():
+    # Função para criar e retornar uma conexão com o banco ded dados
+    conn = sqlite3.connect("usuarios.db")
+    return conn
 
 # Rota para a página de login
 @app.route("/", methods=["GET", "POST"])
@@ -11,8 +15,8 @@ def login():
         user = request.form["username"]
         password = request.form["password"]
 
-        # Conexão com o banco de dados
-        conn = sqlite3.connect("usuarios.db")
+        # Criando conexão com o banco dentro da função
+        conn = get_db_connection()
         cursor = conn.cursor()
 
         # Consulta INSEGURA (vulnerável a SQL Injection)
@@ -35,6 +39,9 @@ def change_password():
         username = request.form["username"]
         new_password = request.form["new_password"]
 
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
         cursor.execute(f"UPDATE users SET password = '{new_password}' WHERE username = '{username}'")
         conn.commit()
         conn.close()
@@ -42,9 +49,9 @@ def change_password():
         return"Senha alterada com sucesso!"
     
     return '''
-        <form method="post>
+        <form method="post">
             Usuário: <input type="text" name="username"><br>
-            Nova senha: <input type="password" name "new_password"><br>
+            Nova senha: <input type="password" name="new_password"><br>
             <button type="submit">Alterar Senha</button>
         </form>
     '''

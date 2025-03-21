@@ -8,7 +8,7 @@ def get_db_connection():
     conn = sqlite3.connect("usuarios.db")
     return conn
 
-# Rota para a página de login
+# Rota criada para a página de login
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -19,7 +19,7 @@ def login():
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # Consulta INSEGURA (vulnerável a SQL Injection)
+        # Consulta INSEGURA (SQL Injection)
         query = f"SELECT * FROM users WHERE username = '{user}' AND password = '{password}'"
         cursor.execute(query)
         result = cursor.fetchone()
@@ -32,7 +32,7 @@ def login():
 
     return render_template("login.html")
 
-#Rota para Alterar Senha
+#Rota Change Password
 @app.route("/change_password", methods=["GET", "POST"])
 def change_password():
     if request.method == "POST":
